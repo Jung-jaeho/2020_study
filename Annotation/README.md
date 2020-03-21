@@ -58,7 +58,7 @@ context에 설정된 resolver를 무시한다고 보면된다. (viewResolver)
  등등 많다.
 
 
-7. autowired
+7. @autowired
 의존관계를 자동으로 설정할때 사용한다.
 생성자,필드,메소드 3곳에 적용가능하다.
 Spring Framework 에서 지원하는 Dependency 정의 용도의 어노테이션 자동주입이며 종속적이다
@@ -68,7 +68,8 @@ Spring Framework 에서 지원하는 Dependency 정의 용도의 어노테이션
 
 위의 xml파일에 bean을 등록한것처럼 빈등록만 한다면 <property>태그나 <constructor-arg>태그를 사용하지 않아도 된다. 빈으로 등록한 memberDao를 이용하여 다른클래스에선 똑같이 그냥 빈만 등록하고 그 클래스에서 의존을 주입하고싶은 빈 대상이 있을경우 @Autowired로 자동 의존 주입하면 된다. 
 
-
+1. @Configuration
+Configuration 어노테이션은 스프링 IOC Container에게 해당 클래스를 Bean 구성 Class 임 을 알려주는 것이다.
 
 
 
