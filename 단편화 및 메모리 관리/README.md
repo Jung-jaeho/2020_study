@@ -51,6 +51,8 @@ but, 프로세스가 필요한 메모리공간 만큼 할당해주기 때문에 
 
 
 - 출처 : https://developer-mac.tistory.com/21
+- 출처 : https://jinhyy.tistory.com/34
+
 
 
 
