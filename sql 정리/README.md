@@ -1,4 +1,9 @@
-# order by
+
+# SELECT 연습
+
+
+
+order by
 
 Select 문을 사용할때 출력되는 결과물은 테이블에 입력된 순서대로 출력되는 것이 기본입니다. 하지만 우리는 가끔은 내림차순으로 혹은 오름차순으로 정렬된 데이터들이 필요할 떄가 있습니다. 이때 사용하는 것이 ORDER BY절입니다.
 ORDER BY 절은 항상 SELECT 문의 맨 마지막에 위치합니다.
@@ -26,9 +31,19 @@ SELECT * FROM table_name ORDER BY 3;
 여러 열을 기준으로 사용
 SELECT *
 FROM table_name
-ORDER BY 3,1 DESC;
+ORDER BY 3,1 DESC;  (지금은 리미트를 한다.)
+
+<한개만 뽑을때>
+-- 코드를 입력하세요
+SELECT NAME 
+FROM ANIMAL_INS
+ORDER BY DATETIME
+LIMIT 1;
+
 
 3번쨰열을 기준으로 오름차순으로 정렬한 상태에서 1번째 열을 기준으로 내림차순으로 정렬하는 쿼리입니다.
+
+
 
 
 <출처> https://gomguard.tistory.com/93
