@@ -72,6 +72,28 @@ LIMIT 1;
 SELECT COUNT(DATETIME) as count
 FROM ANIMAL_INS;
 
+4번
+중복제거 하는 방법
+
+  SELECT DISTINCT ID, NAME
+   FROM TABLE;
+
+    SELECT count(DISTINCT NAME) as count
+    FROM ANIMAL_INS
+
+오라클(ORACLE)에서 데이터 조회 시 데이터 중복을 제거하기 위해서는 대표적으로 2가지 방법이 있다. distinct 키워드를 사용하여 중복을 제거하는 방법과, group by 절을 사용하여 데이터 중복을 제거하는 방법이다.
+두가지 방법 모두 장단점이 존재한다. 
+distinct 키워드를 사용하여 데이터 중복을 제거할때는 select절에 distinct 키워드만 명시하면 되므로 쿼리문이 복잡하지 않고 간결하다. 그러나 distinct를 사용시 temp tablespace에 임시로 저장하고 작업하는 방식이라 시스템에 부하를 줄 수 있다.
+group by절을 이용하여 데이터 중복을 제거할때는 select절의 컬럼을 group by절에도 동일하게 명시를 해야하는 부담감이 있지만 distinct에 비하여 조금 빠른감이 있다.
+
+-중복제거
+SELECT DISTINCT (컬럼명) FROM 테이블명
+
+-중복된 데이터 제거 후 COUNT
+SELECT COUNT(DISTINCT (컬럼명)) FROM 테이블명
+
+-중복찾기
+SELECT 컬럼명 FROM 테이블명 GROUP BY 컬럼명 HAVING COUNT (컬럼명) > 1
 
 <출처> https://gomguard.tistory.com/93
 
