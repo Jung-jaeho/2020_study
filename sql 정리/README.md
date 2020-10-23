@@ -338,6 +338,28 @@ FROM ANIMAL_INS
 WHERE ANIMAL_INS.NAME IN('Lucy','Ella','Pickle','Rogan','Sabrina','Mitty')
 ORDER BY ANIMAL_ID
 
+<문자 찾기>
+'-' : 글자숫자를 정해줌(EX 컬럼명 LIKE '홍_동')
+'%' : 글자숫자를 정해주지않음(EX 컬럼명 LIKE '홍%')
+
+--A로 시작하는 문자를 찾기--
+SELECT 컬럼명 FROM 테이블 WHERE 컬럼명 LIKE 'A%'
+
+--A로 끝나는 문자 찾기--
+SELECT 컬럼명 FROM 테이블 WHERE 컬럼명 LIKE '%A'
+
+--A를 포함하는 문자 찾기--
+SELECT 컬럼명 FROM 테이블 WHERE 컬럼명 LIKE '%A%'
+
+--A로 시작하는 두글자 문자 찾기--
+SELECT 컬럼명 FROM 테이블 WHERE 컬럼명 LIKE 'A_'
+
+--첫번째 문자가 'A''가 아닌 모든 문자열 찾기--
+SELECT 컬럼명 FROM 테이블 WHERE 컬럼명 LIKE'[^A]'
+
+--첫번째 문자가 'A'또는'B'또는'C'인 문자열 찾기--
+SELECT 컬럼명 FROM 테이블 WHERE 컬럼명 LIKE '[ABC]'
+SELECT 컬럼명 FROM 테이블 WHERE 컬럼명 LIKE '[A-C]'
 
 
 
