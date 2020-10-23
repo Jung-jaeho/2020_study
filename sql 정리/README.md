@@ -1,6 +1,7 @@
 
 # SELECT 연습
 
+   - union find?? 어디??
 
 
 order by
@@ -236,6 +237,109 @@ SELECT customer.cust_id, count(orders.order_num) AS num_ord
 FROM customers INNER JOIN orders
 ON customers.cust_id = orders.cust_id
 GROUP BY customers.cust_id;
+
+
+<JOIN>
+
+1.없어진 기록 찾기
+
+SELECT ANIMAL_OUTS.ANIMAL_ID,ANIMAL_OUTS.NAME
+FROM ANIMAL_OUTS LEFT OUTER JOIN ANIMAL_INS
+ON ANIMAL_OUTS.ANIMAL_ID = ANIMAL_INS.ANIMAL_ID
+WHERE ANIMAL_INS.ANIMAL_ID IS NULL;
+
+
+-- 코드를 입력하세요
+select animal_id, name
+ from animal_outs 
+ where animal_id not in 
+    (select animal_id 
+    from animal_ins);
+
+
+
+SELECT ANIMAL_INS.ANIMAL_ID, ANIMAL_INS.NAME
+FROM ANIMAL_INS LEFT OUTER JOIN ANIMAL_OUTS
+ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+WHERE ANIMAL_INS.DATETIME > ANIMAL_OUTS.DATETIME
+ORDER BY ANIMAL_INS.DATETIME
+
+
+SELECT animal_ins.animal_id ,animal_ins.name from animal_ins inner join animal_outs 
+on(animal_ins.animal_id = animal_outs.animal_id)
+where  animal_outs.datetime <animal_ins.datetime
+order by animal_ins.datetime
+
+
+오랜 기간 보호한 동물(1)
+
+    SELECT ANIMAL_INS.NAME,ANIMAL_INS.DATETIME
+    FROM ANIMAL_INS LEFT OUTER JOIN ANIMAL_OUTS
+    ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+    WHERE ANIMAL_OUTS.DATETIME is NULL 
+    ORDER BY ANIMAL_INS.DATETIME
+    LIMIT 3;
+
+
+    SELECT NAME, DATETIME
+    FROM ANIMALINS 
+    WHERE ANIMALID NOT IN 
+    (SELECT s2.ANIMALID 
+    FROM ANIMALINS s3 INNER JOIN ANIMALOUTS s2 
+    ON s3.ANIMALID=s2.ANIMAL_ID)
+    ORDER BY DATETIME
+    LIMIT 3
+
+
+    SELECT S1.NAME, S1.DATETIME 
+    FROM ANIMALINS S1 LEFT JOIN ANIMALOUTS S2 
+    ON S1.ANIMALID = S2.ANIMALID 
+    WHERE ((S2.NAME IS NULL) AND (S1.NAME IS NOT NULL))
+    ORDER BY DATETIME 
+    LIMIT 3
+
+    SELECT S1.NAME, S1.DATETIME
+    FROM ANIMALINS S1 
+    WHERE NOT EXISTS (
+    SELECT S1 
+    FROM ANIMALOUTS S2
+    WHERE S2.ANIMALID = S1.ANIMALID)
+    ORDER BY DATETIME 
+    LIMIT 3
+
+
+<4번 중성화>
+SELECT ANIMAL_OUTS.ANIMAL_ID,ANIMAL_OUTS.ANIMAL_TYPE,ANIMAL_OUTS.NAME
+FROM ANIMAL_OUTS LEFT OUTER JOIN ANIMAL_INS
+ON ANIMAL_OUTS.ANIMAL_ID = ANIMAL_INS.ANIMAL_ID
+WHERE ((ANIMAL_INS.SEX_UPON_INTAKE = 'Intact Female') or (ANIMAL_INS.SEX_UPON_INTAKE = 'Intact Male')) and ((ANIMAL_OUTS.SEX_UPON_OUTCOME = 'Neutered Male') or(ANIMAL_OUTS.SEX_UPON_OUTCOME = 'Spayed Female'))
+
+-- 코드를 입력하세요
+SELECT A.ANIMAL_ID AS ANIMAL_ID, A.ANIMAL_TYPE AS ANIMAL_TYPE, A.NAME AS NAME
+FROM ANIMAL_INS A, ANIMAL_OUTS B
+WHERE A.SEX_UPON_INTAKE LIKE('Intact%') AND A.SEX_UPON_INTAKE != B.SEX_UPON_OUTCOME
+    AND A.ANIMAL_ID = B.ANIMAL_ID
+ORDER BY A.ANIMAL_ID;
+
+-- 코드를 입력하세요
+SELECT a.ANIMAL_ID, a.ANIMAL_TYPE, a.NAME FROM ANIMAL_INS as a INNER JOIN ANIMAL_OUTS as b 
+ON a.ANIMAL_ID = b.ANIMAL_ID 
+WHERE a.SEX_UPON_INTAKE IN('Intact Male', 'Intact Female') AND b.SEX_UPON_OUTCOME IN('Neutered Male', 'Spayed Female')
+
+
+
+
+<sting, DATA>
+
+<1번>
+-- 코드를 입력하세요
+SELECT ANIMAL_ID,NAME,SEX_UPON_INTAKE
+FROM ANIMAL_INS
+WHERE ANIMAL_INS.NAME IN('Lucy','Ella','Pickle','Rogan','Sabrina','Mitty')
+ORDER BY ANIMAL_ID
+
+
+
 
 <출처> https://extbrain.tistory.com/56
 <출처> https://gomguard.tistory.com/93
